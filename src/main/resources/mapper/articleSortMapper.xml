@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.blogdemo.mapper.ArticleSortMapper">
+    <resultMap id="sort" type="com.example.blogdemo.pojo.DocumentType">
+        <id property="docId" column="doc_id"></id>
+        <result property="docName" column="doc_name"></result>
+    </resultMap>
+    <select id="selectDocumentType" resultMap="sort">
+        SELECT * FROM article_sort t1 inner join documenttype  t2 on t1.doc_id = t2.doc_id where art_id = ${artId};
+    </select>
+    <select id="selectAllDocumentType" resultMap="sort">
+        select * from documenttype;
+    </select>
+    <insert id="addArticleSort" parameterType="Integer">
+        insert into article_sort(art_id,doc_id) value(#{artId},#{docId})
+    </insert>
+</mapper>

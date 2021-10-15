@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.blogdemo.mapper.ArticleMapper">
+    <resultMap id="article" type="com.example.blogdemo.pojo.Article">
+        <id property="artId" column="art_id"></id>
+        <result property="artTime" column="art_insert_time"></result>
+        <result property="artUpdateTime" column="art_update_time"></result>
+        <result property="artContent" column="art_content"></result>
+        <result property="artTitle" column="art_title"></result>
+        <result property="artDescribe" column="art_describe"></result>
+        <result property="aetImg" column="art_image"></result>
+        <result property="artContent" column="art_content"></result>
+        <result property="artThumbsSize" column="art_thumbs_size"></result>
+        <result property="artBrowseSize" column="art_browse_size"></result>
+        <result property="artKeyword" column="art_keyword"></result>
+        <result property="artCommentsSize" column="art_comments_size"></result>
+        <collection property="documentTypes" javaType="list" column="art_id" select="com.example.blogdemo.mapper.ArticleSortMapper.selectDocumentType" fetchType="lazy"></collection>
+        <collection property="classifications" javaType="list" column="art_id" select="com.example.blogdemo.mapper.ArticleClassifiationMapper.selectOneClassifiation" fetchType="lazy"></collection>
+    </resultMap>
+<!-- 查询新发布的文章-->
+    <select id="newArticle" resultMap="article">
+        select * from article where isdelete=0 order by art_insert_time desc limit 0,4;
+    </select>
+<!--查询心情笔记-->
+   <select id="moodEssayArticle" resultMap="article">
+        select * from article t1 inner join classification_article t2 on t1.art_id = t2.art_id where t2.classi_id = 2 and t1.isdelete = 0
+
+   </select>
+<!--   查询面试题-->
+    <select id="intervievArticle" resultMap="article">
+        select * from article t1 inner join classification_article t2 on t1.art_id = t2.art_id where t2.classi_id = 1 and t1.isdelete = 0
+
+    </select>
+<!--    查询错误笔记-->
+    <select id="erroNoteArticle" resultMap="article">
+
+        select * from article t1 inner join classification_article t2 on t1.art_id = t2.art_id where t2.classi_id = 3 and t1.isdelete = 0
+    </select>
+<!--    查询单个博文-->
+    <select id="selectOneArticle" resultMap="article">
+        select * from article where art_id = #{artId} and isdelete = 0;
+    </select>
+<!--    查询所有-->
+    <select id="selectAllArticle" resultMap="article">
+        select * from article limit #{page},#{limit};
+    </select>
+<!--   查询总数量-->
+    <select id="selectArticleCount" resultType="int">
+        select count(*) from article
+    </select>
+
+<!--    添加博文-->
+    <insert id="addArticle" parameterType="map" useGeneratedKeys="true" keyColumn="art_id" keyProperty="artId">
+        INSERT INTO article(`art_insert_time`,`art_content`,`art_describe`,`art_title`,`art_image`,`art_update_time`,`art_keyword`)
+        VALUE(now(),#{articleContent},#{articleDescribe},#{articleTitle},#{img},now(),#{articleKeywords})
+    </insert>
+</mapper>

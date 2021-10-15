@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.blogdemo.mapper.RegisterMapper">
+    <resultMap id="user" type="com.example.blogdemo.pojo.User">
+        <id property="userId" column="user_id"></id>
+        <result property="userName" column="user_name"></result>
+        <result property="userPassword" column="user_password"></result>
+        <result property="userEmail" column="user_email"></result>
+        <result property="userProfilePhoto" column="user_profile_photo"></result>
+        <result property="userTegistrationTime" column="user_registration_time"></result>
+        <result property="userBirthday" column="user_birthday"></result>
+        <result property="userAge" column="user_age"></result>
+        <result property="userPhoneNumber" column="user_telephone_number"></result>
+        <result property="userNickname" column="user_nickname"></result>
+        <result property="userSignature" column="user_signature"></result>
+    </resultMap>
+<!--   用户昵称验证-->
+    <select id="chickUserNickname" resultMap="user">
+        select * from user where user_nickname = #{nickname}
+    </select>
+<!--    用户账号验证-->
+    <select id="chickUserName" resultMap="user">
+        select * from user where user_name = #{uname}
+    </select>
+<!--    用户信息存储-->
+    <insert id="insertUserinfo" parameterType="com.example.blogdemo.vo.RegisterVo">
+        insert into user(user_nickname,user_name,user_password,user_email,user_registration_time) value(#{nickname},#{username},#{repassword},#{email},now());
+    </insert>
+</mapper>

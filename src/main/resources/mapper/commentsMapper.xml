@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.blogdemo.mapper.CommentMapper">
+    <resultMap id="BaseResultMap" type="com.example.blogdemo.returndata.CommentData">
+        <id column="comm_id" property="commId"></id>
+        <result column="art_id" property="artId"></result>
+        <result column="u_id" property="uId"></result>
+        <result column="user_profile_photo" property="userImg"></result>
+        <result column="comm_time" property="commTime"></result>
+        <result column="comm_content" property="commContent"></result>
+        <result column="comm_parentid" property="commParentid"></result>
+        <result column="comm_like_num" property="commLikeNum"></result>
+        <result column="comm_nolike_num" property="commNolikeNum"></result>
+        <result column="user_nickname" property="uNickname"></result>
+<!--        <association property="article" column="art_id" select="com.example.blogdemo.mapper.ArticleMapper.selectOneArticle"></association>-->
+<!--        <association property="user" column="u_id" select="com.example.blogdemo.mapper.LoginMapper.selectOntUser"></association>-->
+    </resultMap>
+    <select id="selectComments" resultMap="BaseResultMap">
+        SELECT a.*,b.*
+        FROM `comments` AS a,`user` AS b
+        WHERE a.comm_id=#{commId}
+          AND a.u_id=b.user_id
+          AND a.`isdelete` = b.`isdelete`
+
+    </select>
+<!--    查询所有父评论id-->
+    <select id="getCommentIdByBlogId" resultType="int">
+        select comm_id from comments
+        where art_id = #{artId} and comm_parentid =0
+    </select>
+    <resultMap id="replyData" type="com.example.blogdemo.returndata.ReplyData">
+        <result property="commId" column="comm_id"></result>
+        <result property="artId" column="art_id"></result>
+        <result property="uId" column="user_id"></result>
+        <result property="userImg" column="user_profile_photo"></result>
+        <result property="uNickname" column="user_nickname"></result>
+        <result property="commTime" column="comm_time"></result>
+        <result property="commContent" column="comm_content"></result>
+        <result property="commLikeNum" column="comm_like_num"></result>
+        <result property="commNolikeNum" column="comm_nolike_num"></result>
+        <result property="pareantUserId" column="parent_user_id"></result>
+
+    </resultMap>
+<!--查询子评论-->
+    <select id="selectByPid" resultMap="replyData">
+        SELECT u.*,c.*
+        FROM
+            `user`  u,
+            comments c
+        WHERE u.user_id = c.u_id
+          AND c.comm_parentid = #{parentCommId}
+    </select>
+
+</mapper>

@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"  xmlns="http://www.w3.org/1999/html"
+      xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>home</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/iconfont/iconfont.css">
+    <!--    <link rel="stylesheet" href="css/index.css">-->
+    <link rel="stylesheet" href="css/iconfont1/iconfont.css">
+    <link rel="stylesheet" href="css/iconfont2/iconfont.css">
+    <link rel="stylesheet" href="css/iconfont3/iconfont.css">
+    <link rel="stylesheet" href="css/top.css">
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/register.css">
+</head>
+<script src="js/jquery-1.12.4.js"></script>
+<script src="js/top.js"></script>
+
+<script src="js/index.js"></script>
+<script src="js/register.js"></script>
+<script src="js/login.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+<script src="layui/layui.js"></script>
+<script src="js/md5.min.js"></script>
+<script src="js/exit.js"></script>
+<body>
+    <!-- 登录弹框 -->
+    <div class="login_div" >
+        <div class="contentlogin">
+            <!-- left -->
+            <div onload="test1()" class="login-box-img mobile-hidden">
+                <div class="desc">
+                    <div class="fuwu_div">
+                        <p><i class="iconfont iconhuo"></i> 只需一步极速注册</p>
+                        <p><i class="iconfont iconhuo"></i> 唐哥博客提供精良的资源</p>
+                        <p><i class="iconfont iconhuo"></i> 匠心打磨，优质服务</p>
+                        <p><i class="iconfont iconhuo"></i> 打造王牌精英</p>
+                    </div>
+                </div>
+                <img onload="onlo()" src="" class="vein">
+            </div>
+            <!-- box-shadow: none;
+        border: 1px solid rgb(204, 204, 204); -->
+            <!-- right -->
+            <div class="login_box">
+                <div class="close">
+                    <img src="image/取消.png" style="width: 30px;height: 30px;" alt="">
+                </div>
+                <div class="login_form" id="loginUser">
+                    <div class="login_title">
+                        登录
+                    </div>
+                    <form action="#" method="post">
+
+                        <div class="form_text_ipt" >
+                            <input name="loginusername" type="text" placeholder="手机号/邮箱" >
+                        </div>
+                        <div class="ececk_warning" ><span>用户名/手机号不能为空</span></div>
+                        <div class="form_text_ipt" style="box-shadow: none;">
+                            <input name="loginpassword"  type="password" placeholder="密码">
+                        </div>
+                        <div class="ececk_warning"><span>密码不能为空</span></div>
+                        <div class="form_check_ipt">
+                            <div class="left check_left">
+                                <label><input name="" type="checkbox"> 下次自动登录</label>
+                            </div>
+                            <div class="right check_right">
+                                <a href="#">忘记密码</a>
+                            </div>
+                        </div>
+                        <div class="form_btn">
+                            <button type="button" v-on:click="toLogin">登录</button>
+                        </div>
+                        <div class="form_reg_btn" id="toregister">
+                            <span>还没有帐号？</span><a href="#">马上注册</a>
+                        </div>
+                    </form>
+                    <div class="other_login">
+                        <div class="left other_left">
+                            <span>其它登录方式</span>
+                        </div>
+                        <div class="right other_right">
+                            <a href="#"><i class="fa fa-qq fa-2x"></i></a>
+                            <a href="#"><i class="fa fa-weixin fa-2x"></i></a>
+                            <a href="#"><i class="fa fa-weibo fa-2x"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- 注册弹框 -->
+    <div class="register_div">
+        <div class="content">
+            <!-- left -->
+            <div class="login-box-img mobile-hidden">
+                <div class="desc">
+                    <div class="fuwu_div">
+                        <p><i class="iconfont iconhuo"></i> 只需一步极速注册</p>
+                        <p><i class="iconfont iconhuo"></i> 唐哥博客提供精良的资源</p>
+                        <p><i class="iconfont iconhuo"></i> 匠心打磨，优质服务</p>
+                        <p><i class="iconfont iconhuo"></i> 打造王牌精英</p>
+                    </div>
+                </div>
+                <img src="" class="vein">
+            </div>
+            <!-- right -->
+            <div class="login_box ">
+                <div class="close">
+                    <img src="image/取消.png" style="width: 30px;height: 30px;" alt="">
+                </div>
+                <div class="login_form">
+                    <div class="login_title">
+                        注册
+                    </div>
+                    <form action="#" method="post">
+                        <div class="form_text_ipt" >
+                            <input name="nickname" type="text" placeholder="用户昵称">
+                        </div>
+                        <div class="ececk_warning"><span>昵称不能为空</span></div>
+                        <div class="form_text_ipt" >
+                            <input name="username" type="text" placeholder="用户名/手机号码">
+                        </div>
+                        <div class="ececk_warning"><span>用户名/手机号码不能为空</span></div>
+                        <div class="form_text_ipt">
+                            <input name="password" type="password" placeholder="密码">
+                        </div>
+                        <div class="ececk_warning"><span>密码不能为空</span></div>
+                        <div class="form_text_ipt">
+                            <input name="repassword" type="password" placeholder="确认密码">
+                        </div>
+                        <div class="ececk_warning"><span>密码不能为空</span></div>
+                        <div class="form_text_ipt">
+                            <input name="email" type="text" placeholder="邮箱">
+                        </div>
+                        <div class="ececk_warning"><span>邮箱不能为空</span></div>
+
+                        <div class="form_btn">
+                            <button type="button" id="button1" v-on:click="toRegister">注册</button>
+                        </div>
+                        <div class="form_reg_btn" id="tologin">
+                            <span>已有帐号？</span><a href="#">马上登录</a>
+                        </div>
+                    </form>
+                    <div class="other_login">
+                        <div class="left other_left">
+                            <span>其它登录方式</span>
+                        </div>
+                        <div class="right other_right">
+                            <a href="#"><i class="fa fa-qq fa-2x"></i></a>
+                            <a href="#"><i class="fa fa-weixin fa-2x"></i></a>
+                            <a href="#"><i class="fa fa-weibo fa-2x"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="content" >
+        <!-- 小猫咪 -->
+        <script src="https://eqcn.ajz.miesnfu.com/wp-content/plugins/wp-3d-pony/live2dw/lib/L2Dwidget.min.js"></script>
+        <script>
+            L2Dwidget.init({
+                "model": {
+                    jsonPath: "https://unpkg.com/live2d-widget-model-hijiki/assets/hijiki.model.json",
+                    "scale": 1
+                },
+                "display": {
+                    "position": "right",   // 设置猫咪的上下左右位置
+                    "width": 140,
+                    "height": 240,
+                    "hOffset": 0,
+                    "vOffset": 0
+                },
+                "mobile": {
+                    "show": true,
+                    "scale": 0.5
+                },
+                "react": {
+                    "opacityDefault": 0.7,   // 设置猫咪的透明度
+                    "opacityOnHover": 0.2
+                }
+            });
+            window.onload = function() {
+                $("#live2dcanvas").attr("style", "position: fixed; opacity: 0.7; left: 70px; bottom: 0px; z-index: 1; pointer-events: none;")
+            }
+        </script>
+        <!-- 头部 -->
+        <div class="site_header">
+            <div class="header_banner" style="display:none;">
+                <div class="header_content">
+                    <div class="header_top">
+                        <ul class="header_top_ul">
+                            <li class="top_li1"><a href="">公告</a></li>
+                            <li class="top_li"><a href="">排行榜</a></li>
+                            <li class="top_li"><a href="">留言板</a></li>
+                            <li class="top_li"><a href="">工单</a></li>
+                            <li class="top_li"><a href="">会员认证</a></li>
+                            <li class="top_li"><a href="">签到</a></li>
+                        </ul>
+                    </div>
+                    <div class="header_search">
+                           <div class="header_search_article">
+                                <span>文章<label>∨</label></span>
+                           </div>
+                           <div class="search">
+                                <input type="text" placeholder="搜索">
+                           </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="header_button_banner">
+                <div class="header_button_content">
+                    <div class="heder_logo">
+                        <a href="#" style="color: #fff;">
+                            <img src="image/logo.png" alt="">
+                         </a>
+                    </div>
+                    <div class="heder_menu" >
+
+                        <ul class="layui-nav layui-bg-black" lay-filter="" style="color: red">
+
+                            <li class="layui-nav-item fonts" >
+
+                                 <a href="#">首页<i class="layui-icon layui-icon-down layui-nav-more"></i></a>
+                            </li>
+                            <li class="layui-nav-item">
+                                <a href="">面试题<i class="layui-icon layui-icon-down layui-nav-more"></i></a>
+                            </li>
+                            <li class="layui-nav-item">
+                                <a href="">心情随笔<i class="layui-icon layui-icon-down layui-nav-more"></i></a>
+                            </li>
+                            <li class="layui-nav-item">
+                                <a href="">错误笔记<i class="layui-icon layui-icon-down layui-nav-more"></i></a>
+                            </li>
+                            <li class="layui-nav-item">
+                                <a href="">技术分类<i class="layui-icon layui-icon-down layui-nav-more"></i></a>
+                                <dl class="layui-nav-child">
+                                    <dd><a href="javascript:;">spring</a></dd>
+                                    <dd><a href="javascript:;">Mybatis</a></dd>
+                                    <dd><a href="javascript:;">springMvc</a></dd>
+                                </dl>
+                            </li>
+                            <li class="layui-nav-item">
+                                <a href="">个人中心<i class="layui-icon layui-icon-down layui-nav-more"></i></a>
+                            </li>
+                            <li class="layui-nav-item">
+                                <div style="width: 278px;"></div>
+                            </li>
+                                <li class="layui-nav-item" id="userlogin">
+                                     <a th:if="${session.user == null}" class="button_login haha">登录</a>
+                                </li>
+                                <li class="layui-nav-item" id="userregister">
+                                    <a th:if="${session.user == null}" class="button_register haha">快速注册</a>
+                                </li>
+                            <li th:if="${session.user != null}" class="layui-nav-item">
+                                <a href="" ><img src="//t.cn/RCzsdCq" class="layui-nav-img"><span th:text="${session.user.userNickname}">我</span></a>
+                                <dl class="layui-nav-child">
+                                    <dd><a href="javascript:;">修改信息</a></dd>
+                                    <dd><a href="javascript:;">安全管理</a></dd>
+                                    <dd v-on:click="datas"><a href="javascript:;">退了</a></dd>
+                                </dl>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- body -->
+        <div class="body_div">
+            <div class="body_div">
+                <div class="index_top_bg cat_bg_img" data-paralasic="0.35" >
+                    <div class="container top_bg_txt">
+                        <div class="top_bg_title">
+                            <h2>—记录学习生活的草根个人博客网站</h2>
+                        </div>
+                    </div>
+                </div>
+            <!-- 文章界面 -->
+            <div class="wrapper" id="article">
+                <div class="post-modules-top">
+                    <div class="modules-title-box">
+                        <h2 class="module-title">最新发布</h2>
+                    </div>
+                    <div class="post-list-cats post-list-cats-has-title" >
+                        <div class="post-carts-list-row">
+                            <a href="javascript:void(0)" class="cat-list post-load-button picked">
+                                <span data-type="cat" style="color: #2882c5;">全部</span>
+                            </a>
+                        </div>
+                     </div>
+                 </div>
+                 <div class="hidden_line">
+                    <ul class="b2_gap" >
+                        <li class="post_3_li" v-for="item in article.newArticle">
+                            <div class="item_in box">
+                                <div class="post_module_thumb">
+                                    <div class="b2_radius">
+                                        <!-- 下载的小图标 -->
+                                        <div>
+                                        </div>
+                                        <!-- 图片 -->
+                                        <a target="_blank" href="#" rel="nofollow" class="thumb-link">
+
+                                             <img v-bind:src="[item.aetImg]" alt="" class="post-thumb lazy">
+
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="post-info">
+                                    <div>
+                                        <div  class="post-list-cat">
+                                            <a target="_blank"  href="#" v-for="sort in item.documentTypes" class="post-list-cat-item b2_radius" style="font-size:15px;color: rgb(96, 125, 139);">
+                                                {{sort.docName}}</a>
+
+                                </div>
+                            </div>
+                            <h2>
+                                <a target="_blank" v-bind:href="['tocontent?artid='+item.artId]" style="font-size:13px;font-weight: bolder;">{{item.artTitle}}</a>
+                            </h2>
+                             <div  class="post-excerpt">
+                                 {{item.artDescribe}}
+                                        </div>
+
+                                        <div class="post-list-meta-box ">
+                                            <ul class="post-list-meta">
+<!--                                                <li class="post-list-meta-user">-->
+<!--                                                    <a href="#" class="post-list-meta-avatar">-->
+<!--                                                         <img src="image/xiaologo.png" class="avatar b2-radius lazy">-->
+
+<!--                                                         <span>唐哥</span>-->
+<!--                                                    </a>-->
+<!--                                                    </li>-->
+                                                    <li class="post-list-meta-like">
+                                                        <span>
+                                                            <i class="iconfont icon-aixin">
+
+                                                            </i>{{item.artThumbsSize}}
+                                                        </span>
+                                                    </li>
+                                                    <li class="post-list-meta-comment">
+                                                        <span>
+                                                            <i class="iconfont icon-xinxi">
+
+                                                            </i>{{item.artCommentsSize}}
+                                                        </span>
+                                                    </li>
+                                                    <li class="post-list-meta-views">
+                                                        <span>
+                                                            <i class="iconfont  icon-chakan">
+
+                                                            </i>{{item.artBrowseSize}}
+                                                        </span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                            </div>
+
+                        </li>
+
+                    </ul>
+                    <div class="clear"></div>
+                 </div>
+
+                 <div class="post-modules-top">
+                    <div class="modules-title-box">
+                        <h2 class="module-title">心情随笔</h2>
+                    </div>
+                    <div class="post-list-cats post-list-cats-has-title" >
+                        <div class="post-carts-list-row">
+                            <a href="javascript:void(0)" class="cat-list post-load-button picked">
+                                <span data-type="cat" style="color: #2882c5;">全部</span>
+                            </a>
+                        </div>
+                     </div>
+                 </div>
+                 <div class="hidden_line">
+                    <ul class="b2_gap_ul">
+                        <li class="post-list-item item-post-style-1" v-for="item in article.moodEssayArticle">
+                            <div class="xin_box" >
+                                <div class="post-module-thumb" style="padding-top: 75%;">
+                                    <a target="_blank" v-bind:href="['tocontent?artid='+item.artId]" rel="nofollow" class="thumb-link">
+                                      <img v-bind:alt="item.artTitle" v-bind:src="[item.aetImg]" class="post-thumb lazy">
+                                     </a>
+                                    
+                                    </div>
+                                     <div class="post-info">
+                                         <h2>
+                                             <a style="font-weight: bolder;font-size: 13px;" target="_blank" v-bind:href="['tocontent?artid='+item.artId]">{{item.artTitle}}
+                                            </a>
+                                        </h2> 
+                                        <div class="post-list-meta-box">
+                                            <ul class="post-list-meta">
+                                                <li></li>
+                                                <li class="post-list-meta-like">
+                                                    <span>
+                                                        <i class="iconfont icon-aixin">
+
+                                                        </i>{{artThumbsSize}}
+                                                    </span>
+                                                </li>
+                                                <li class="post-list-meta-comment">
+                                                    <span>
+                                                        <i class="iconfont icon-tubiaozhizuomoban-">
+
+                                                        </i>{{item.artCommentsSize}}
+                                                    </span>
+                                                </li>
+                                                <li class="post-list-meta-views">
+                                                    <span>
+                                                        <i class="iconfont  icon-eye">
+
+                                                        </i>{{item.artBrowseSize}}
+                                                    </span>
+                                                </li>
+                                            </ul>
+                                        </div> 
+                                        <div class="list-footer">
+<!--                                            <a href="https://www.haah.net/u/1" class="post-list-meta-avatar">-->
+<!--                                                <img src="image/xiaologo.png" alt="">-->
+<!--                                                    <span>唐哥</span>-->
+<!--                                                </a>-->
+                                                <span>
+                                                    <time v-bind:datetime="[item.artTime]" class="b2timeago">{{item.artTime}}</time>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                         </li>
+                    </ul>
+                    <div class="clear">
+
+                    </div>
+
+                 </div>
+
+
+                <div class="post-modules-top">
+                    <div class="modules-title-box">
+                        <h2 class="module-title">面试题</h2>
+                    </div>
+                    <div class="post-list-cats post-list-cats-has-title" >
+                        <div class="post-carts-list-row">
+                            <a href="javascript:void(0)" class="cat-list post-load-button picked">
+                                <span data-type="cat" style="color: #2882c5;">全部</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="hidden_line">
+                    <ul class="b2_gap_ul">
+                        <li class="post-list-item item-post-style-1" v-for="item in article.intervievArticle">
+                            <div class="xin_box">
+                                <div class="post-module-thumb" style="padding-top: 75%;">
+                                    <a target="_blank" v-bind:href="['tocontent?artid='+item.artId]" rel="nofollow" class="thumb-link">
+                                        <img v-bind:alt="item.artTitle" v-bind:src="[item.aetImg]" class="post-thumb lazy">
+                                    </a>
+
+                                </div>
+                                <div class="post-info">
+                                    <h2>
+                                        <a style="font-weight: bolder;font-size: 13px;" target="_blank" v-bind:href="['tocontent?artid='+item.artId]">{{item.artTitle}}
+                                        </a>
+                                    </h2>
+                                    <div class="post-list-meta-box">
+                                        <ul class="post-list-meta">
+                                            <li></li>
+                                            <li class="post-list-meta-like">
+                                                    <span>
+                                                        <i class="iconfont icon-aixin">
+
+                                                        </i>{{artThumbsSize}}
+                                                    </span>
+                                            </li>
+                                            <li class="post-list-meta-comment">
+                                                    <span>
+                                                        <i class="iconfont icon-tubiaozhizuomoban-">
+
+                                                        </i>{{item.artCommentsSize}}
+                                                    </span>
+                                                   </li>
+                                            <li class="post-list-meta-views">
+                                                    <span>
+                                                        <i class="iconfont  icon-eye">
+
+                                                        </i>{{item.artBrowseSize}}
+                                                    </span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="list-footer">
+<!--                                        <a href="https://www.haah.net/u/1" class="post-list-meta-avatar">-->
+<!--                                            <img src="image/xiaologo.png" alt="">-->
+<!--                                            <span>唐哥</span>-->
+<!--                                        </a>-->
+                                        <span>
+                                                    <time v-bind:time="[item.artTime]" itemprop="datePublished" class="b2timeago">{{item.artTime}}</time>
+                                                </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="clear">
+
+                    </div>
+
+                </div>
+
+                <!-- --------------- -->
+                <div class="post-modules-top">
+                    <div class="modules-title-box">
+                        <h2 class="module-title">错误笔记</h2>
+                    </div>
+                    <div class="post-list-cats post-list-cats-has-title" >
+                        <div class="post-carts-list-row">
+                            <a href="javascript:void(0)" class="cat-list post-load-button picked">
+                                <span data-type="cat" style="color: #2882c5;">全部</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="hidden_div">
+                    <!-- 里面 -->
+                    <ul class="grp_ul">
+                        <li v-for="item in article.erroNoteArticle">
+                            <div class="item_in_box">
+                                <!-- 左边图片 -->
+                                <div class="post-module-thumb">
+                                    <a v-bind:href="['tocontent?artid='+item.artId]" class="thumb-link">
+                                        <img v-bind:alt="item.artTitle" v-bind:src="[item.aetImg]">
+                                    </a>
+                                </div>
+                                <!-- 右边标题 -->
+                                <div class="post-infos">
+                                    <div>
+
+                                    </div>
+                                    <h2>
+                                        <a style="font-weight: bolder;font-size: 13px;" target="_blank" v-bind:href="['tocontent?artid='+item.artId]">{{item.artTitle}}</a>
+                                    </h2>
+                                    <div class="post-excerpt1">
+                                        {{item.artDescribe}}
+                                    </div>
+                                    <div class="post-list-meta-box ">
+                                        <ul class="post-list-meta">
+<!--                                            <li class="post-list-meta-users" style="margin-left: -15px;">-->
+<!--                                                <a href="https://www.haah.net/u/1" class="post-list-meta-avatar">-->
+<!--                                                    <img src="image/xiaologo.png" alt="">-->
+<!--                                                    <span>唐哥</span>-->
+<!--                                                </a>-->
+<!--                                            </li>-->
+                                            <li class="post-list-meta-date">
+                                            <span>
+                                                <time datetime="2021-09-12 12:31:56" itemprop="datePublished" class="b2timeago">{{item.artTime}}</time>
+                                            </span>
+                                            </li>
+                                            <li class="post-list-meta-views">
+                                            <span>
+                                                <i class="iconfont  icon-eye">
+
+                                                </i>168</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="js/data.js"></script>
+</html>

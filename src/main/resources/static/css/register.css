@@ -1,0 +1,167 @@
+body{
+    padding: 0;
+    margin: 0;
+    background-color: #636363;
+}
+.register_div .content{
+    width: 725px;
+    /* border: 1px solid blue;; */
+      position: absolute;
+    /* height:100%; */
+    margin: 0 auto;
+    border-radius: 20px;
+    left: 31%;
+    top: 23%;
+   
+  
+}
+.register_div .close{
+    width: 30x;
+    height:30px;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+}
+.register_div .fuwu_div{
+    left: 25%;
+    /* margin-left: 55px; */
+    position: relative;
+}
+/* left */
+.register_div .login-box-img {
+    width: 325px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    background: linear-gradient(314deg,#14406d 0%,#5598cf 100%);
+    border-radius: 20px 0 0 20px;
+    /* margin-left: -1px; */
+    /* border: 1px solid red; */
+}
+.register_div .login-box-img .desc {
+    position: absolute;
+    top: 33%;
+    padding: 0;
+    padding-left: 50px;
+}
+.register_div .login-box-img .desc p {
+    font-size: 14px;
+    font-weight: 500;
+    color: #fff;
+    line-height: 20px;
+    margin-bottom: 24px;
+}
+.register_div .login-box-img img {
+    position: absolute;
+    bottom: 0;
+}
+
+.register_div img {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+    border: 0;
+}
+/* right */
+.register_div input {
+    font-family: 微软雅黑, MicrosoftYaHei;
+    font-size: 14px;
+    outline: none medium;
+}
+.register_div .login_box {
+    width: 400px;
+    /* height: 500px; */
+    background: #FFFFFF;
+    /* margin: 0px auto; */
+    position: relative;
+    border-radius: 0 20px 20px 0;
+    top: 0;
+    left: 326px;
+}
+.register_div .login_title {
+    font-size: 25px;
+    text-align: center;
+    color: #FF7F50;
+    padding: 15px 0;
+    width: 300px;
+    margin: 0 auto;
+    border-bottom: solid 1px #CCCCCC;
+}
+.register_div .form_text_ipt {
+    width: 300px;
+    height: 40px;
+    border: solid 1px #CCCCCC;
+    margin: 20px auto 0 auto;
+    background: #FFFFFF;
+}
+.register_div .form_text_ipt input {
+    width: 290px;
+    height: 30px;
+    margin: 5px;
+    border: none;
+    font-family: "微软雅黑";
+    font-size: 15px;
+    color: #666;
+}
+.register_div .ececk_warning {
+    font-size: 13px;
+    color: red;
+    width: 300px;
+    margin: 0 auto;
+    display: none;
+}
+.register_div .form_text_ipt {
+    width: 300px;
+    height: 40px;
+    border: solid 1px #CCCCCC;
+    margin: 20px auto 0 auto;
+    background: #FFFFFF;
+}
+.register_div .form_btn {
+    width: 300px;
+    height: 40px;
+    margin: 10px auto;
+}
+.register_div .form_btn button {
+    width: 100%;
+    height: 100%;
+    border: none;
+    color: #FFFFFF;
+    font-size: 14px;
+    background: #FF7F50;
+    cursor: pointer;
+}
+.register_div .form_reg_btn {
+    width: 300px;
+    margin: 0 auto;
+    font-size: 14px;
+    color: #666;
+}
+.register_div a {
+    text-decoration: none;
+    color: #3cf;
+    -webkit-tap-highlight-color: transparent;
+}
+.register_div .other_login {
+    overflow: hidden;
+    width: 300px;
+    height: 80px;
+    line-height: 80px;
+    margin: 0px auto;
+}
+.register_div .other_left {
+    font-size: 14px;
+    color: #999;
+}
+.register_div .left {
+    float: left;
+}
+.register_div .right {
+    float: right;
+}
+.register_div .other_right a {
+    margin: 5px;
+    color: #636363;
+}

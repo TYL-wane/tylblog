@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>内容</title>
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <link rel="stylesheet" href="css/content.css">
+<!--    <link rel="stylesheet" href="css/reset.css">-->
+    <link rel="stylesheet" href="css/top.css">
+    <link rel="stylesheet" href="css/register.css">
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/iconfont/iconfont.css">
+<!--    <link rel="stylesheet" href="css/index.css">-->
+    <link rel="stylesheet" href="css/iconfont1/iconfont.css">
+    <link rel="stylesheet" href="css/iconfont2/iconfont.css">
+    <link href="http://cdn.bootcss.com/highlight.js/8.0/styles/monokai_sublime.min.css" rel="stylesheet">
+</head>
+<script src="js/jquery-1.12.4.js"></script>
+<script src="http://cdn.bootcss.com/highlight.js/8.0/highlight.min.js"></script>
+<script src="js/wangEditor.js"></script>
+<script src="js/contentWangEditor.js"></script>
+<script src="layui/layui.js"></script>
+
+<script src="js/top.js"></script>
+<script src="js/content.js"></script>
+<script src="js/register.js"></script>
+<script src="js/login.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+<script src="js/md5.min.js"></script>
+<script src="js/exit.js"></script>
+<body>
+<!-- 登录弹框 -->
+<div class="login_div" >
+    <div class="contentlogin">
+        <!-- left -->
+        <div onload="test1()" class="login-box-img mobile-hidden">
+            <div class="desc">
+                <div class="fuwu_div">
+                    <p><i class="iconfont iconhuo"></i> 只需一步极速注册</p>
+                    <p><i class="iconfont iconhuo"></i> 唐哥博客提供精良的资源</p>
+                    <p><i class="iconfont iconhuo"></i> 匠心打磨，优质服务</p>
+                    <p><i class="iconfont iconhuo"></i> 打造王牌精英</p>
+                </div>
+            </div>
+            <img onload="onlo()" src="" class="vein">
+        </div>
+        <!-- box-shadow: none;
+    border: 1px solid rgb(204, 204, 204); -->
+        <!-- right -->
+        <div class="login_box">
+            <div class="close">
+                <img src="image/取消.png" style="width: 30px;height: 30px;" alt="">
+            </div>
+            <div class="login_form" id="loginUser">
+                <div class="login_title">
+                    登录
+                </div>
+                <form action="#" method="post">
+
+                    <div class="form_text_ipt" >
+                        <input name="loginusername" type="text" placeholder="手机号/邮箱" >
+                    </div>
+                    <div class="ececk_warning" ><span>用户名/手机号不能为空</span></div>
+                    <div class="form_text_ipt" style="box-shadow: none;">
+                        <input name="loginpassword"  type="password" placeholder="密码">
+                    </div>
+                    <div class="ececk_warning"><span>密码不能为空</span></div>
+                    <div class="form_check_ipt">
+                        <div class="left check_left">
+                            <label><input name="" type="checkbox"> 下次自动登录</label>
+                        </div>
+                        <div class="right check_right">
+                            <a href="#">忘记密码</a>
+                        </div>
+                    </div>
+                    <div class="form_btn">
+                        <button type="button" v-on:click="toLogin">登录</button>
+                    </div>
+                    <div class="form_reg_btn" id="toregister">
+                        <span>还没有帐号？</span><a href="#">马上注册</a>
+                    </div>
+                </form>
+                <div class="other_login">
+                    <div class="left other_left">
+                        <span>其它登录方式</span>
+                    </div>
+                    <div class="right other_right">
+                        <a href="#"><i class="fa fa-qq fa-2x"></i></a>
+                        <a href="#"><i class="fa fa-weixin fa-2x"></i></a>
+                        <a href="#"><i class="fa fa-weibo fa-2x"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- 注册弹框 -->
+<div class="register_div">
+    <div class="content">
+        <!-- left -->
+        <div class="login-box-img mobile-hidden">
+            <div class="desc">
+                <div class="fuwu_div">
+                    <p><i class="iconfont iconhuo"></i> 只需一步极速注册</p>
+                    <p><i class="iconfont iconhuo"></i> 唐哥博客提供精良的资源</p>
+                    <p><i class="iconfont iconhuo"></i> 匠心打磨，优质服务</p>
+                    <p><i class="iconfont iconhuo"></i> 打造王牌精英</p>
+                </div>
+            </div>
+            <img src="" class="vein">
+        </div>
+        <!-- right -->
+        <div class="login_box ">
+            <div class="close">
+                <img src="image/取消.png" style="width: 30px;height: 30px;" alt="">
+            </div>
+            <div class="login_form">
+                <div class="login_title">
+                    注册
+                </div>
+                <form action="#" method="post">
+                    <div class="form_text_ipt" >
+                        <input name="nickname" type="text" placeholder="用户昵称">
+                    </div>
+                    <div class="ececk_warning"><span>昵称不能为空</span></div>
+                    <div class="form_text_ipt" >
+                        <input name="username" type="text" placeholder="用户名/手机号码">
+                    </div>
+                    <div class="ececk_warning"><span>用户名/手机号码不能为空</span></div>
+                    <div class="form_text_ipt">
+                        <input name="password" type="password" placeholder="密码">
+                    </div>
+                    <div class="ececk_warning"><span>密码不能为空</span></div>
+                    <div class="form_text_ipt">
+                        <input name="repassword" type="password" placeholder="确认密码">
+                    </div>
+                    <div class="ececk_warning"><span>密码不能为空</span></div>
+                    <div class="form_text_ipt">
+                        <input name="email" type="text" placeholder="邮箱">
+                    </div>
+                    <div class="ececk_warning"><span>邮箱不能为空</span></div>
+
+                    <div class="form_btn">
+                        <button type="button" id="button1" v-on:click="toRegister">注册</button>
+                    </div>
+                    <div class="form_reg_btn" id="tologin">
+                        <span>已有帐号？</span><a href="#">马上登录</a>
+                    </div>
+                </form>
+                <div class="other_login">
+                    <div class="left other_left">
+                        <span>其它登录方式</span>
+                    </div>
+                    <div class="right other_right">
+                        <a href="#"><i class="fa fa-qq fa-2x"></i></a>
+                        <a href="#"><i class="fa fa-weixin fa-2x"></i></a>
+                        <a href="#"><i class="fa fa-weibo fa-2x"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="content">
+    <!-- 小猫咪 -->
+    <script src="https://eqcn.ajz.miesnfu.com/wp-content/plugins/wp-3d-pony/live2dw/lib/L2Dwidget.min.js"></script>
+    <script>
+        L2Dwidget.init({
+            "model": {
+                jsonPath: "https://unpkg.com/live2d-widget-model-hijiki/assets/hijiki.model.json",
+                "scale": 1
+            },
+            "display": {
+                "position": "right",   // 设置猫咪的上下左右位置
+                "width": 140,
+                "height": 240,
+                "hOffset": 0,
+                "vOffset": 0
+            },
+            "mobile": {
+                "show": true,
+                "scale": 0.5
+            },
+            "react": {
+                "opacityDefault": 0.7,   // 设置猫咪的透明度
+                "opacityOnHover": 0.2
+            }
+        });
+        window.onload = function() {
+            $("#live2dcanvas").attr("style", "position: fixed; opacity: 0.7; left: 70px; bottom: 0px; z-index: 1; pointer-events: none;")
+        }
+    </script>
+    <!-- 头部 -->
+    <!-- 头部 -->
+    <div class="site_header">
+        <div class="header_banner" style="display:none;">
+            <div class="header_content">
+                <div class="header_top">
+                    <ul class="header_top_ul">
+                        <li class="top_li1"><a href="">公告</a></li>
+                        <li class="top_li"><a href="">排行榜</a></li>
+                        <li class="top_li"><a href="">留言板</a></li>
+                        <li class="top_li"><a href="">工单</a></li>
+                        <li class="top_li"><a href="">会员认证</a></li>
+                        <li class="top_li"><a href="">签到</a></li>
+                    </ul>
+                </div>
+                <div class="header_search">
+                    <div class="header_search_article">
+                        <span>文章<label>∨</label></span>
+                    </div>
+                    <div class="search">
+                        <input type="text" placeholder="搜索">
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="header_button_banner">
+            <div class="header_button_content">
+                <div class="heder_logo">
+                    <a href="#" style="color: #fff;">
+                        <img src="image/logo.png" alt="" style="width: 188px;height: 175px;margin-top: -50px;">
+                    </a>
+                </div>
+                <div class="heder_menu" >
+
+                    <ul class="layui-nav layui-bg-black" lay-filter="" style="color: red">
+
+                        <li class="layui-nav-item fonts" >
+
+                            <a href="toIndex">首页<i class="layui-icon layui-icon-down layui-nav-more"></i></a>
+                        </li>
+                        <li class="layui-nav-item">
+                            <a href="">面试题<i class="layui-icon layui-icon-down layui-nav-more"></i></a>
+                        </li>
+                        <li class="layui-nav-item">
+                            <a href="">心情随笔<i class="layui-icon layui-icon-down layui-nav-more"></i></a>
+                        </li>
+                        <li class="layui-nav-item">
+                            <a href="">错误笔记<i class="layui-icon layui-icon-down layui-nav-more"></i></a>
+                        </li>
+                        <li class="layui-nav-item">
+                            <a href="">技术分类<i class="layui-icon layui-icon-down layui-nav-more"></i></a>
+                            <dl class="layui-nav-child">
+                                <dd><a href="javascript:;">spring</a></dd>
+                                <dd><a href="javascript:;">Mybatis</a></dd>
+                                <dd><a href="javascript:;">springMvc</a></dd>
+                            </dl>
+                        </li>
+                        <li class="layui-nav-item">
+                            <a href="">个人中心<i class="layui-icon layui-icon-down layui-nav-more"></i></a>
+                        </li>
+                        <li class="layui-nav-item">
+                            <div style="width: 278px;"></div>
+                        </li>
+                        <li class="layui-nav-item" id="userlogin">
+                            <a th:if="${session.user == null}" class="button_login haha">登录</a>
+                        </li>
+                        <li class="layui-nav-item" id="userregister">
+                            <a th:if="${session.user == null}" class="button_register haha">快速注册</a>
+                        </li>
+                        <li th:if="${session.user != null}" class="layui-nav-item">
+                            <a href="" ><img src="//t.cn/RCzsdCq" class="layui-nav-img"><span th:text="${session.user.userNickname}">我</span></a>
+                            <dl class="layui-nav-child">
+                                <dd><a href="javascript:;">修改信息</a></dd>
+                                <dd><a href="javascript:;">安全管理</a></dd>
+                                <dd id = "exit" th:uid="${session.user.userId}" uid=""><a href="javascript:;">退了</a></dd>
+
+                            </dl>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+<!-- body -->
+<div class="site_content">
+    <div class="b2-single-content wrapper">
+        <!-- 文章 -->
+        <div class="content-area" th:artid="${article.artId}" artid="">
+            <article class="single-article b2-radius box">
+
+
+                <header class="entry-header">
+                    <!--博文标题-->
+                    <h1 th:text="${article.artTitle}">无标题</h1>
+                    <div id="post-meta">
+                        <div class="post-meta-row">
+                            <ul class="post-meta">
+                                <li>
+                                    <!-- 博文分类-->
+                                    <div class="post-list-cat  b2-radius">
+
+                                        <a th:each="doc:${article.documentTypes}" target="__blank" href="#" class="post-list-cat-item b2-radius" style="color: rgb(96, 125, 139);">
+                                            [[${doc.docName}]]</a>
+<!--                                        <a th:text="${article.documentTypes[0].docName}" target="__blank" href="#" class="post-list-cat-item b2-radius" style="color: rgb(96, 125, 139);">-->
+<!--                                            商业插件</a>-->
+<!--                                        <a th:text="${article.documentTypes[1].docName}" target="__blank" href="#" class="post-list-cat-item b2-radius" style="color: rgb(96, 125, 139);">-->
+<!--                                            站长资源</a>-->
+                                    </div>
+                                </li>
+                                <li class="single-date">
+                                <span>
+                                    <time th:text="${article.artTime}"  itemprop="datePublished" class="b2timeago">7月25日</time>
+                                </span>
+                                </li>
+                                <li class="single-like">
+                                <span>
+                                    <i class="iconfont icon-aixin ">
+
+                                    </i>
+                                    <b th:text="${article.artThumbsSize}">2</b>
+                                </span>
+                                </li>
+                                <li class="single-eye">
+                                <span>
+                                    <i class="iconfont icon-eye ">
+
+                                    </i>
+                                    <b th:text="${article.artBrowseSize}">20.6k</b>
+                                    </span>
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </header>
+                <div class="entry-content">
+                    <!-- 博文描述-->
+                    <div class="content-excerpt" th:text="${article.artDescribe}">
+                        WP Rocket通过压缩HTML、JavaScript和CSS文件的大小，减少网站组件和数据的加载时间，尤其是国内的Wordpress主题内js相对国外主题较少，也更少的使用插件，更多的是集成在主题内。
+                    </div>
+                    <!--博文内容区 -->
+                    <div id="aas"  th:utext="${article.artContent}">
+
+                    </div>
+
+                </div>
+                <div class="content-footer post-content-footer">
+                    <div class="inner-wrapper-sticky" style="position: relative; transform: translate3d(0px, 0px, 0px);">
+                        <div class="post-content-footer-in">
+                            <div class="content-footer-poster">
+                                <button data-title="海报分享" class="poster-span b2tooltipbox">
+                                    <i class="iconfont icon-zhuanfa"></i>
+                                    <b class="mobile-show">海报分享</b>
+                                </button>
+                                <button data-title="去评论" class="mobile-hidden b2tooltipbox comment-span">
+                                    <i class="iconfont icon-xinxi"></i>
+                                </button>
+                                <button data-title="收藏" class="text favorite-button b2tooltipbox">
+                                    <i class="iconfont icon-xingxing"></i>
+                                    <b class="mobile-show">收藏</b>
+                                </button>
+                            </div>
+                            <div data-title="喜欢" class="content-footer-zan-cai b2tooltipbox">
+                                    <span class="">
+                                        <i class="iconfont icon-aixin"></i>
+                                        <b>2</b>
+                                    </span>
+                                <span class="mobile-show">
+                                        <i class="b2font b2-dislike-fill "></i>
+                                        <b>0</b>
+                                    </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </article>
+            <!-- 评论 -->
+            <div class="comments-box">
+                <!-- 写评论 -->
+                <div class="mg-t comment-form b2-radius">
+                    <div class="lb_comment_title">
+                        <span>文章评论</span>
+                    </div>
+                    <div class="respond box b2-radius">
+                        <div class="com-info">
+                            <img th:if="${session.user != null}" th:src="${session.user.userImg}" class="com-info-avatar avatar b2-radius" src="image/lunbo3.jpg">
+                            <img th:if="${session.user == null}" class="com-info-avatar avatar b2-radius" src="image/lunbo3.jpg">
+                        </div>
+                        <div class="com-form">
+                            <div id="com-form-title" class="com-form-title b2-show"><div>
+                                <div>
+                                    <span th:if="${session.user == null}">欢迎您，新朋友，感谢参与互动！</span>
+                                    <span th:if="${session.user != null}">欢迎您，[[${session.user.userNickname}]]，感谢参与互动！</span>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        <div id="wangeditor" style="z-index: 0;" class="com-form-textarea">
+
+                        </div>
+                    </div>
+                    <div class="com-form-button">
+                        <div class="com-form-button-r">
+                            <button id="bo" class="buttons">提交</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- 所有评论展示 -->
+                <div class="comments-area box b2-radius">
+                    <!-- 评论头部 -->
+                    <div class="comments-title">
+                        <div class="comment-info">
+                            <span class="comment-count"> 11 条回复</span>
+                            <span>
+                                        <b class="comment-auth-mod comment-auth">A</b>
+                                        <i>文章作者</i>
+                                    </span>
+                            <span>
+                                        <b class="comment-auth-mod comment-mod">M</b>
+                                        <i>管理员</i>
+                                        </span>
+                        </div>
+                        <div class="comment-tips" style="">
+                            <span><span>欢迎发表您的观点</span></span>
+                        </div>
+                    </div>
+                    <!-- 评论内容区域 -->
+                    <div class="comments-area-content">
+                        <ol class="comment-list" th:each="comm : ${comments}" >
+
+                            <li class="commId" th:commid="${comm.commId}"commid="">
+                                <article class="comment">
+                                    <figure class="gravatar avatar-parent">
+                                        <picture class="picture">
+                                            <img th:src="${comm.userImg}" src="image/headImg.png" class="avatar lazy">
+                                        </picture>
+                                    </figure>
+                                    <div class="comment-item reply_div b2-radius">
+                                        <div role="complementary" class="comment-meta">
+                                            <div class="comment-user-info">
+                                                <div>
+                                                    <span class="comment-author">
+                                                        <a th:text="${comm.UNickname}" th:parid="${comm.UId}" parid="" th:paruname="${comm.UNickname}" paruname="" class="parUname"  target="_blank" href="#">云间小道</a>
+                                                    </span>
+                                                    <span>
+                                                    <span th:text="${comm.commTime}" class="lv-icon user-lv b2-lv0">
+                                                       2021-07-07 12:20:15
+                                                    </span>
+                                                </span>
+                                                </div>
+                                            </div>
+                                            <div class="comment-floor">
+                                                <time th:text="${comm.commTime}" class="b2timeago">7月7日</time>
+                                            </div>
+                                        </div>
+                                        <div itemprop="text" class="comment-content post-content">
+                                            <div class="comment-content-text">
+                                                <p th:utext="${comm.commContent}"></p>
+                                            </div>
+                                            <div class="comment-footer">
+                                                <div class="comment-footer-tools">
+                                                    <div class="comment-vote-hidden">
+                                                        <div class="comment-up text">
+                                                            <i class="iconfont icon-aixin">
+
+                                                            </i>
+                                                            <span th:text="${comm.commLikeNum}">0</span>
+                                                        </div>
+                                                        <div  class="comment-down text">
+                                                            <i class="iconfont icon-aixin_polie"></i>
+                                                            <span th:text="${comm.commNolikeNum}">0</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="comment-item-hidden" >
+                                                        <button data-id="1941"  class="text fr parent-reply">回复</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+<!--                                        <div id="wang" style="display: block;">&ndash;&gt;-->
+<!--                                            <div id="comment-children-wangEditor" style="width: 730px;" class="children children-mark">-->
+
+<!--                                            </div>-->
+<!--                                            <div  class="commit_btn" style=" display:none;margin-left: 750px;margin-top: -36px;">-->
+<!--                                                <button class="text fr reply">提交</button>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+                                    </div>
+
+                                    <!-- 评论回复 -->
+                                    <ul class="children">
+                                        <li>
+                                            <article id="comment-1945" itemscope="itemscope"  class="comment">
+                                                <div  class="comment-item b2-radius">
+                                                    <div class="hui">
+                                                        <div class="commentsReply" th:each="childs : ${comm.child}" style="border-bottom: 1px solid #f0eeee; margin-bottom: 10px;">
+                                                            <div role="complementary" class="comment-meta">
+                                                                <div class="comment-user-info">
+                                                                    <div>
+                                                                        <span class="comment-author">
+                                                                            <a th:text="${childs.UNickname}" class="nickname" th:parentuid="${childs.uId}" parentuid="" target="_blank" href="#">唐哥</a>
+                                                                            <span class="comment_at">@</span>
+                                                                            <a th:text="${childs.parentUserNickname}" target="_blank" href="#">云间小道</a>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="comment-floor">
+                                                                    <time itemprop="datePublished" th:text="${childs.commTime}" class="b2timeago">7月7日</time>
+                                                                </div>
+                                                            </div>
+                                                            <div itemprop="text" class="comment-content post-content">
+                                                                <div class="comment-content-text">
+                                                                    <p th:utext="${childs.commContent}"></p>
+                                                                </div>
+                                                                <div class="comment-footer">
+                                                                    <div class="comment-footer-tools">
+                                                                        <div class="comment-vote-hidden">
+                                                                            <div id="comment-up-1945"  class="comment-up text">
+                                                                                <i class="iconfont icon-aixin"></i>
+                                                                                <span th:text="${childs.commLikeNum}">0</span>
+                                                                            </div>
+                                                                            <div id="comment-down-1945"  class="comment-down text">
+                                                                                <i class="iconfont icon-aixin_polie"></i>
+                                                                                <span th:text="${childs.commNolikeNum}">0</span>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="comment-item-hidden">
+                                                                            <button data-id="1945"  class="text fr reply">回复</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div id="comment-form-1945"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+<!--                                                    <div id="wang" style="display: none;">-->
+<!--                                                        <div id="comment-children-wangEditor" style="width: 730px;" class="children children-mark">-->
+
+<!--                                                        </div>-->
+<!--                                                        <div  class="commit_btn" style=" display:none;margin-left: 750px;margin-top: -36px;">-->
+<!--                                                            <button class="text fr reply">提交</button>-->
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+                                                </div>
+
+                                            </article>
+                                        </li>
+                                    </ul>
+                                </article>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            <!-- 左边内容 -->
+            <aside class="widget-area">
+                <div>
+                    <!-- 作者简介 -->
+                    <div class="sidebar-innter b2-radius">
+                        <div class="b2-widget-title">
+                            <h2 class="widget-title">
+                                <span class="guanyu">关于作者</span>
+                                <span class="widget-span">
+                                            <button class="text1">
+                                               + 关注
+                                            </button>
+                                             <button class="text1">私信</button>
+                                            </span>
+                            </h2>
+                        </div>
+                        <div class="myself_card">
+                            <p>职业：程序员，软件开发工程师，java大佬</p>
+                            <p>现居：四川省-成都市</p>
+                            <p>Email：2119196781@qq.com</p>
+
+                        </div>
+                        <!-- 文章数量信息。。。 -->
+                        <div class="w-a-count">
+                            <div>
+                                <p>文章</p>
+                                <span>295</span>
+                            </div>
+                            <div>
+                                <p>评论</p>
+                                <span>262</span>
+                            </div>
+                            <div>
+                                <p>关注</p>
+                                <span>0</span>
+                            </div>
+                            <div>
+                                <p>粉丝</p>
+                                <span>51</span>
+                            </div>
+                        </div>
+                        <!-- 文章展示 -->
+                        <div class="w-a-post-list">
+                            <div>
+                                <a href="#" target="_blank" class="ass">
+                                    <span class="b2-color">[文章]</span>
+                                    IObit Uninstaller PRO V11.0.1.14 绿色特别版
+                                </a>
+                            </div>
+                            <div>
+                                <a href="#" target="_blank" class="ass">
+                                    <span class="b2-color">[文章]</span>
+                                    WordPress插件Elementor Pro V3.3.8高级可视化页面编辑生成器中文最新版（全网首发）
+                                </a>
+                            </div>
+                            <div>
+                                <a href="#" target="_blank" class="ass">
+                                    <span class="b2-color">[文章]</span>
+                                    微软.NET离线运行库合集 V2021.08.22
+                                </a>
+                            </div>
+                            <div>
+                                <a href="#" target="_blank" class="ass">
+                                    <span class="b2-color">[文章]</span>
+                                    优启通 EasyU v3.7.2021.0808 官方高级VIP会员无广告纯净版
+                                </a>
+                            </div>
+                        </div>
+                        <div class="widget-mission-footer">
+                            <a href="https://www.haah.net/tastream/1" target="_blank">Ta的全部动态</a>
+                        </div>
+                    </div>
+                    <!-- 排行榜 -->
+                    <div class="rb_hot_click b2-radius">
+                        <span class="rb_hot_click_title">点击排行</span>
+                        <ul>
+                            <li>
+                                <a href="#" target="_blank">
+                                    <span class="serialNumber serialNumber_cur">1</span>
+                                    <span class="title">Computed 和 Watch</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" target="_blank" class="a_bgcur">
+                                    <span class="serialNumber serialNumber_cur">2</span>
+                                    <span class="title">前端进阶算法1：如何分析、统计算法的执行效率和资源消耗？</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" target="_blank">
+                                    <span class="serialNumber serialNumber_cur">3</span>
+                                    <span class="title">阿里、头条、网易等 19 家大厂面试题</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" target="_blank" class="a_bgcur">
+                                    <span class="serialNumber">4</span>
+                                    <span class="title">知足知福，才会长乐人生。</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" target="_blank">
+                                    <span class="serialNumber">5</span>
+                                    <span class="title">为爱，守望一生的时光</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" target="_blank" class="a_bgcur">
+                                    <span class="serialNumber">6</span>
+                                    <span class="title">往昔终不在，岁月愿重来</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" target="_blank">
+                                    <span class="serialNumber">7</span>
+                                    <span class="title">2018，我们不一样过分过分过分过分过分过分过分过分</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" target="_blank" class="a_bgcur">
+                                    <span class="serialNumber">8</span>
+                                    <span class="title">春山夜，且听轻风语</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+
+
+    </div>
+</div>
+
+</div>
+</div>
+</body>
+</html>

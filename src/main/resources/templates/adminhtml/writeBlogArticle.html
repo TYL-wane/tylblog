@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/wrireBlogArticle.css">
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <link href="http://cdn.bootcss.com/highlight.js/8.0/styles/monokai_sublime.min.css" rel="stylesheet">
+</head>
+
+<script src="http://cdn.bootcss.com/highlight.js/8.0/highlight.min.js"></script>
+<!--<script src="js/highlight.js"></script>-->
+<script src="js/jquery-1.12.4.js"></script>
+<script src="js/jquery.form.js"></script>
+<script src="layui/layui.js"></script>
+<script src="js/wangEditor.js"></script>
+<script src="js/writeBlogArticle.js"></script>
+<!--<script src="js/highlight.js"></script>-->
+<body>
+    <div class="main clo-lg-10" id="main" >
+        <div class="row" >
+          <form action="addArticle" id="form-reg" enctype="multipart/form-data" method="post" class="add-article-form" >
+            <div class="col-md-9" style="width: 1200px;">
+              <h1 class="page-header">撰写新文章</h1>
+              <div class="form-group">
+                <label for="article-title" class="sr-only">标题</label>
+                <input type="text" id="article-title" name="articleTitle" class="form-control" placeholder="在此处输入标题" >
+              </div>
+              <div class="form-group" >
+                <!-- <label for="article-content" class="sr-only">内容</label> -->
+                <div id="article_content" class="edui-default" >
+
+                </div>
+                <input type="hidden" id="articleContent" name="articleContent" value="">
+                <div id="get-html" >
+                  <div id="articleContentButton" class="btn btn-primary">确定写入</div>
+                </div>
+              </div>
+              <div class="add-article-box">
+                <h2 class="add-article-box-title"><span>关键字</span></h2>
+                <div class="add-article-box-content" >
+                    <input type="text" class="form-control" placeholder="请输入关键字" name="articleKeywords" autocomplete="off">
+                  <span class="prompt-text">多个标签请用英文逗号,隔开。</span>
+                </div>
+              </div>
+              <div class="add-article-box">
+                <h2 class="add-article-box-title"><span>描述</span></h2>
+                <div class="add-article-box-content">
+                    <textarea class="form-control" name="articleDescribe" autocomplete="off"></textarea>
+                  <span class="prompt-text">描述是可选的手工创建的内容总结，并可以在网页描述中使用</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-10" style="width: 400px;">
+              <h1 class="page-header">操作</h1>
+              <div class="add-article-box">
+                <h2 class="add-article-box-title"><span>文章标题/标签</span></h2>
+                <div class="add-article-box-content">
+                  <ul class="category-list" >
+                    <li th:each="classifiation,stat:${classifiations}">
+                      <label>
+                        <input name="articleClassiId" type="radio" th:value="${classifiation.classiId}" value="1" >
+                        <span style="color: #1E9FFF;font-weight: 700;font-size: 19px;" >[(${classifiation.classiName})]</span>
+                      </label>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="add-article-box">
+                <h2 class="add-article-box-title"><span>文章分类</span></h2>
+                <div class="add-article-box-content">
+                  <ul class="category-list">
+                    <li th:each="documentType,stat:${documentTypes}">
+                      <label>
+                        <input name="articleDocId" type="checkbox" th:value="${documentType.docId}" value="1" >
+                        <span style="color: #1E9FFF;font-weight: 700;font-size: 19px;" >[(${documentType.docName})]</span>
+                      </label>
+                    </li>
+
+                  </ul>
+                </div>
+              </div>
+
+              <div class="add-article-box">
+                <h2 class="add-article-box-title"><span>文章展示图片</span></h2>
+                <div class="add-article-box-contentImg">
+
+                  <a href="javascript:;" class="a-upload">
+                    <input type="file" name="articleImg" id="">点击这里上传文件
+                  </a>
+                </div>
+              </div>
+
+
+              <div class="add-article-box">
+                <h2 class="add-article-box-title"><span>发布</span></h2>
+                <div class="add-article-box-content">
+                    <p><label>状态：</label><span class="article-status-display">未发布</span></p>
+                  <p><label>公开度：</label><input type="radio" name="visibility" value="0" checked="">公开 <input type="radio" name="visibility" value="1">加密</p>
+                  <p><label>发布于：</label><span class="article-time-display"><input style="border: none;" type="datetime" name="time" value="2016-01-09 17:29:37"></span></p>
+                </div>
+                <div class="add-article-box-footer">
+                  <button id="sub" class="btn btn-primary" type="button" name="submit">发布</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+</body>
+</html>

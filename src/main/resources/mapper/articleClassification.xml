@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.blogdemo.mapper.ArticleClassifiationMapper">
+    <resultMap id="classifiation" type="com.example.blogdemo.pojo.Classification">
+        <id column="classi_id" property="classiId"></id>
+        <result column="classi_name" property="classiName"></result>
+    </resultMap>
+    <select  id="selectAllClassifiation" resultMap="classifiation">
+        select * from classification;
+    </select>
+    <select id="selectOneClassifiation" resultMap="classifiation">
+        SELECT * FROM classification_article t1 inner join classification  t2 on t1.classi_id = t2.classi_id where t1.art_id = ${artId};
+    </select>
+    <insert id="addClassification" parameterType="Integer">
+        insert into classification_article(art_id,classi_id) value(#{artId},#{classiId})
+    </insert>
+</mapper>
