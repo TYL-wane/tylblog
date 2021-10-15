@@ -60,4 +60,4 @@ mybatis:
 
 file:
   staticAccessPath: /uploadBlogImg/**
-  uploadFolder: D:\\blog\\tylblog\\uploadBlogImg\\
+  uploadFolder: C:\\IdeaProjects3DUYIObject\\tylblog\\uploadBlogImg\\
