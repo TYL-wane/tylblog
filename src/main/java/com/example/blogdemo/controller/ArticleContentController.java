@@ -28,7 +28,7 @@ public class ArticleContentController {
         //根据博文id查询博文
        Article article = articleService.selectOneArticle(Integer.parseInt(artId));
         //查询博文评论
-        List<CommentData> commentData = commentService.selectComments(16);
+        List<CommentData> commentData = commentService.selectComments(Integer.parseInt(artId));
 //        System.out.println(article);
        //拿到当前的数据存入request
         model.addAttribute("article",article);
