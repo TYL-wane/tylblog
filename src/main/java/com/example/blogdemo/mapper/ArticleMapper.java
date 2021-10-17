@@ -35,4 +35,13 @@ public interface ArticleMapper {
      * 添加博文信息
      * */
     int addArticle(AddArticleVo addArticleVo);
+
+    /**
+     * 博文点赞
+     * */
+    int onArtThumbsSize(@Param("artId") Integer artId);
+    /**
+     * 博文取消点赞
+     * */
+    int outArtThumbsSize(@Param("artId") Integer artId);
 }

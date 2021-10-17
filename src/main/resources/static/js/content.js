@@ -160,6 +160,119 @@ $(".parent-reply").click(function(){
 })
 
 
+
+// 博文点赞
+    $("#xihuan").find(".icon-aixin").click(function(){
+        //获取状态
+        var data_d = $("#xihuan").attr("data_d");
+        //获取博文id
+        var artid = $(".content-area").attr("artid");
+        //获取数量
+        var num =  $("#xihuan").find("b").text();
+        //用户id
+        var uid = $("#exit").attr("uid");
+        if( typeof(uid)== "undefined" ){
+            layer.msg("请先登录再点赞",{
+                icon:2
+            })
+        }else {
+            //判断状态
+            if (data_d == 0) {
+                //发送请求
+                $.ajax({
+                    type: "post",
+                    url: "outArtThumbsSize",
+                    data: {
+                        artId: artid,
+                        uId:uid
+                    },
+                    success: function (data) {
+                        if (data.code == 200) {
+                            $("#xihuan").find("b").text(parseInt(num) - 1);
+                            $("#xihuan").attr("data_d", 1)
+                            //没有点赞
+                            $("#xihuan").find(".icon-aixin").css({"color": "#696a6e"})
+                            layer.msg("取消成功", {
+                                icon: 1
+                            })
+                        } else {
+                            layer.msg("取消失败", {
+                                icon: 1
+                            })
+                        }
+                    }
+                })
+            } else if (data_d == 1) {
+                //发送请求
+                $.ajax({
+                    type: "post",
+                    url: "onArtThumbsSize",
+                    data: {
+                        artId: artid,
+                        uId:uid
+                    },
+                    success: function (data) {
+                        if (data.code == 200) {
+                            $("#xihuan").find("b").text(parseInt(num) + 1);
+                            $("#xihuan").attr("data_d", 0)
+                            $("#xihuan").find(".icon-aixin").css({"color": "red"});
+                            layer.msg("点赞成功", {
+                                icon: 1
+                            })
+                        } else {
+                            layer.msg("点赞失败", {
+                                icon: 1
+                            })
+                        }
+                    }
+                })
+            }
+        }
+    })
+
+
+
+    //评论点赞
+    //喜欢
+    $(".comments-area-content").find(".up").click(function(){
+        //获取评论id
+        var commid = $(this).attr("commid");
+        //用户id
+        var uid = $("#exit").attr("uid");
+        //获取博文id
+        var artid = $(".content-area").attr("artid");
+        if( typeof(uid)== "undefined" ){
+            layer.msg("请先登录再点赞",{
+                icon:2
+            })
+        }else{
+            var dataD = $(this).attr("data_d");
+            if(dataD == 0){
+                //没有做点赞
+                $(this).css({"color":"red"});
+                $(this).attr("commid",1);
+
+            }else{
+                //点赞
+                $(this).css({"color":"#2882c5"});
+                $(this).attr("commid",0);
+            }
+        }
+    })
+
+    //不喜欢
+    $(".comments-area-content").find(".down").click(function(){
+        //获取评论id
+        var commid = $(this).attr("commid");
+        //用户id
+        var uid = $("#exit").attr("uid");
+        if( typeof(uid)== "undefined" ){
+            layer.msg("请先登录再点赞",{
+                icon:2
+            })
+        }
+    })
+
 })
 
 function wang(name){

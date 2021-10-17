@@ -14,4 +14,9 @@ public interface CommentService {
      * 根据博文id查询该博文下的所有评论
      * */
     List<CommentData> selectComments(Integer artId);
+
+    /**
+     * 查询评论条数
+     * */
+    int selectCommentSize(Integer artId);
 }

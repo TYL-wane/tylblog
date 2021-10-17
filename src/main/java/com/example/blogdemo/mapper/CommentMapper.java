@@ -23,6 +23,13 @@ public interface CommentMapper {
      * 查询所有的父评论id
      * */
     List<Integer> getCommentIdByBlogId(@Param("artId") Integer artId);
-
+    /**
+     * 查询父评论信息
+     *
+     * */
     List<ReplyData> selectByPid(@Param("parentCommId") Integer parentCommId);
+    /**
+     * 查询评论条数
+     * */
+    int selectCommentSize(@Param("artId") Integer artId);
 }

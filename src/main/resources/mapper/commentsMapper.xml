@@ -54,4 +54,9 @@
           AND c.comm_parentid = #{parentCommId}
     </select>
 
+<!--    查询评论条数-->
+    <select id="selectCommentSize" resultType="int">
+        SELECT COUNT(*) FROM `comments` WHERE art_id = #{artId}
+    </select>
+
 </mapper>

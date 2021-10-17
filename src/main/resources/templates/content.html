@@ -363,9 +363,13 @@
                                 </button>
                             </div>
                             <div data-title="喜欢" class="content-footer-zan-cai b2tooltipbox">
-                                    <span class="">
+                                    <span th:if="${articleThumbs == null}" id="xihuan" data_d="1">
                                         <i class="iconfont icon-aixin"></i>
-                                        <b>2</b>
+                                        <b th:text="${article.artThumbsSize}">0</b>
+                                    </span>
+                                    <span th:if="${articleThumbs != null}" id="xihuan" data_d="0">
+                                        <i style="color: red;" class="iconfont icon-aixin"></i>
+                                        <b th:text="${article.artThumbsSize}">0</b>
                                     </span>
                                 <span class="mobile-show">
                                         <i class="b2font b2-dislike-fill "></i>
@@ -413,7 +417,7 @@
                     <!-- 评论头部 -->
                     <div class="comments-title">
                         <div class="comment-info">
-                            <span class="comment-count"> 11 条回复</span>
+                            <span class="comment-count"> [[${commentSize}]] 条回复</span>
                             <span>
                                         <b class="comment-auth-mod comment-auth">A</b>
                                         <i>文章作者</i>
@@ -464,13 +468,13 @@
                                                 <div class="comment-footer-tools">
                                                     <div class="comment-vote-hidden">
                                                         <div class="comment-up text">
-                                                            <i class="iconfont icon-aixin">
+                                                            <i data_d="0" th:commid="${comm.commId}"commid="" class="up iconfont icon-aixin">
 
                                                             </i>
                                                             <span th:text="${comm.commLikeNum}">0</span>
                                                         </div>
                                                         <div  class="comment-down text">
-                                                            <i class="iconfont icon-aixin_polie"></i>
+                                                            <i data_d="0" th:commid="${comm.commId}"commid="" class="down iconfont icon-aixin_polie"></i>
                                                             <span th:text="${comm.commNolikeNum}">0</span>
                                                         </div>
                                                     </div>
@@ -519,11 +523,11 @@
                                                                     <div class="comment-footer-tools">
                                                                         <div class="comment-vote-hidden">
                                                                             <div id="comment-up-1945"  class="comment-up text">
-                                                                                <i class="iconfont icon-aixin"></i>
+                                                                                <i data_d="0" th:commid="${childs.commId}"commid="" class="up iconfont icon-aixin"></i>
                                                                                 <span th:text="${childs.commLikeNum}">0</span>
                                                                             </div>
                                                                             <div id="comment-down-1945"  class="comment-down text">
-                                                                                <i class="iconfont icon-aixin_polie"></i>
+                                                                                <i data_d="0" th:commid="${childs.commId}"commid="" class="down iconfont icon-aixin_polie"></i>
                                                                                 <span th:text="${childs.commNolikeNum}">0</span>
                                                                             </div>
                                                                         </div>

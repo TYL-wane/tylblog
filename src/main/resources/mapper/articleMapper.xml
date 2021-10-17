@@ -57,4 +57,13 @@
         INSERT INTO article(`art_insert_time`,`art_content`,`art_describe`,`art_title`,`art_image`,`art_update_time`,`art_keyword`)
         VALUE(now(),#{articleContent},#{articleDescribe},#{articleTitle},#{img},now(),#{articleKeywords})
     </insert>
+
+<!--    博文点赞-->
+    <update id="onArtThumbsSize" parameterType="int">
+        UPDATE `article` SET `art_thumbs_size` = `art_thumbs_size`+1 WHERE art_id = #{artId};
+    </update>
+    <!--    博文取消点赞-->
+    <update id="outArtThumbsSize" parameterType="int">
+        UPDATE `article` SET `art_thumbs_size` = `art_thumbs_size`-1 WHERE art_id = #{artId};
+    </update>
 </mapper>

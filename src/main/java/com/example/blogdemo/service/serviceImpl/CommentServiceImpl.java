@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 /**
- * 评论业务
+ * 评论业务层
  * */
 @Service
 public class CommentServiceImpl implements CommentService {
@@ -23,49 +23,6 @@ public class CommentServiceImpl implements CommentService {
     private CommentMapper commentMapper;
     @Autowired
     private LoginMapper userMapper;
-
-    public void selectComments12(Integer artId) {
-//        List<Comments> allComments = commentMapper.selectComments(artId);
-//        if (allComments == null || allComments.size() == 0) {
-//            return new ArrayList<>();
-//        }
-//        List<Comments> comments = new ArrayList<>();
-//        //用来装父评论
-//        List<Comments> parents = new ArrayList<>();
-//        for (Comments comment : allComments) {
-//            //判断是否有父评论
-//            if (comment.getCommParentid()==null) {
-//
-//                comments.add(comment);
-//                parents.add(comment);
-//            } else {
-//                boolean foundParent=false;
-//                //循环父list
-//                for (Comments parent : parents) {
-//                    //用所有的comment拿到父评论id  与 评论的id进行对比
-//                    if (comment.getCommParentid() == parent.getCommId()) {
-//                        //判断是否有子评论
-//                        if (parent.getChild() == null) {
-//                            //添加一个子评论
-//                            parent.setChild(new ArrayList<>());
-//                        }
-//                        //如果判断的是有parentcommId == connId
-//                        //添加一个子评论
-//                        parent.getChild().add(comment);
-//                        parents.add(comment);
-//                        foundParent=true;
-//                        //如果对list迭代过程中同时修改list，会报java.util.ConcurrentModificationException
-//                        // 的异常，所以我们需要break,当然break也可以提高算法效率
-//                        break;
-//                    }
-//                }
-//                if (!foundParent) {
-//                    throw new RuntimeException("can not find the parent comment");
-//                }
-//            }
-//        }
-//        return comments;
-    }
 
     @Override
     public List<CommentData> selectComments(Integer artId) {
@@ -92,5 +49,10 @@ public class CommentServiceImpl implements CommentService {
         }
         return result;
 
+    }
+
+    @Override
+    public int selectCommentSize(Integer artId) {
+        return commentMapper.selectCommentSize(artId);
     }
 }
